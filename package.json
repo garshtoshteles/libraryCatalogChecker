@@ -1,0 +1,25 @@
+{
+  "name": "librarycatalogchecker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garshtoshteles/libraryCatalogChecker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garshtoshteles/libraryCatalogChecker/issues"
+  },
+  "homepage": "https://github.com/garshtoshteles/libraryCatalogChecker#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.3"
+  }
+}
