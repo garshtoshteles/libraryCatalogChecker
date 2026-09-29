@@ -1,22 +1,39 @@
-import { test, expect } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import { test } from "@playwright/test";
 
-test("Open Catalog", async ({ page }) => {
-  await page.goto("https://rvalibrary.org/");
+// import the list of books to test against
+// https://developers.google.com/workspace/sheets/api/guides/concepts
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Home - Richmond Public Library/);
-});
+// create book object (consider putting this in another file)
+type Book = {
+  title: string;
+  // Add the fields needed to find/check a book.
+};
 
-test("get started link", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
+// split all books into a list of book objects.
+// consdier putting this in same file as sheet downloader utility
+const books = JSON.parse(
+  readFileSync(
+    /* this is wrong, this won't be a readFS */
+    new URL("../.test-data/books.json" /* import.meta.url */),
+    "utf8",
+  ),
+) as Book[];
 
-  // Click the get started link.
-  await page.getByRole("link", { name: "Get started" }).click();
+// actual tests.
+for (const book of books) {
+  test(`catalog contains: ${book.title}`, async ({ page }) => {
+    await page.goto(
+      // URL should already be the catalog search page with the search term pre-filled.
+      // will make helper to build URL from title, possibly with Author
+      "https://rcpl.ent.sirsi.net/client/en_US/default/search/results?te=#homerivers",
+    );
+    // determine availability
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(
-    page.getByRole("heading", { name: "Installation" }),
-  ).toBeVisible();
-});
+    // store availability
+  });
+}
 
-// what will the test actually do? it will open a browser to the catalog. it will also grab the google sheet. let's start there.
+// after all:
+// write availability to sheet, confirming change
+// tear down
