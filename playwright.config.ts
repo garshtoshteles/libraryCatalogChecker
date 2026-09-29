@@ -39,7 +39,7 @@ export default defineConfig({
       use: {
         browserName: "chromium",
         launchOptions: {
-          executablePath: "usr/bin/brave-browser",
+          executablePath: "/opt/brave.com/brave/brave-browser",
         },
       },
     },
