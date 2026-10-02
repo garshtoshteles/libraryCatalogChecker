@@ -11,7 +11,7 @@ class Book {
   getSearchURL(): string {
     const baseURL =
       "https://rcpl.ent.sirsi.net/client/en_US/default/search/results?qu=";
-    return `${baseURL}${encodeURIComponent(this.title)}`;
+    return `${baseURL}${encodeURIComponent(this.title)}+&qf=FORMAT%09Format%09BOOK%09Books`;
   }
 }
 
@@ -24,6 +24,8 @@ const books = (
 for (const book of books) {
   test(`Presence of ${book.title}`, async ({ page }) => {
     await page.goto(book.getSearchURL());
+    await page.waitForTimeout(1000);
+    await page.mouse.wheel(0, 165); /* gets navbar out of the way */
     await page.screenshot({ path: `screenshots/${book.title}.png` });
   });
 }
