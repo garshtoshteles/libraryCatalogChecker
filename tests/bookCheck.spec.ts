@@ -27,9 +27,12 @@ for (const book of books) {
     await page.waitForTimeout(1000);
     await page.mouse.wheel(0, 165); /* gets navbar out of the way */
     await page.screenshot({ path: `screenshots/${book.title}.png` });
+    // check if book is present and reservable (not necessarily available)
+    // write availability to sheet, confirming change
+    // check if this title has an audiobook
+    // write audiobook availability to sheet, confirming change
   });
 }
 
 // after all:
-// write availability to sheet, confirming change
 // tear down
